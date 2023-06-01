@@ -13,6 +13,7 @@
     <input type="checkbox" id="input-admin" />
     <label for="input-admin">Admin?</label>
     <button id="submit-data" onclick="funcSubmitData()">Submit data</button>
+    <button id="empty-table" onclick="funcEmptyTable()">Empty Table</button>
 
     <table id="myTable">
       <tr>
@@ -40,6 +41,7 @@
         <td>-</td>
       </tr>
     </table>
+
     <script>
       function funcSubmitData() {
         var table = document.getElementById("myTable");
@@ -54,16 +56,53 @@
           var adminValue = "-";
         }
 
-        var row = table.insertRow(1);
-        var cell0 = row.insertCell(0);
-        var cell1 = row.insertCell(1);
-        var cell2 = row.insertCell(2);
-        var cell3 = row.insertCell(3);
+        let index = funcCheckDuplicateUsername(username);
 
-        cell0.innerHTML = username;
-        cell1.innerHTML = email;
-        cell2.innerHTML = address;
-        cell3.innerHTML = adminValue;
+        if (index != 0) {
+          funcEditData(index, email, address, adminValue);
+        } else {
+          var row = table.insertRow(1);
+          var cell0 = row.insertCell(0);
+          var cell1 = row.insertCell(1);
+          var cell2 = row.insertCell(2);
+          var cell3 = row.insertCell(3);
+
+          cell0.innerHTML = username;
+          cell1.innerHTML = email;
+          cell2.innerHTML = address;
+          cell3.innerHTML = adminValue;
+        }
+      }
+
+      function funcCheckDuplicateUsername(username) {
+        var totalRowCount = document.getElementById("myTable").rows.length;
+        console.log(totalRowCount);
+
+        for (let i = 1; i < totalRowCount; i++) {
+          var x = document.getElementById("myTable").rows[i].cells;
+          var cellUsername = x[0].innerHTML;
+
+          if (cellUsername == username) {
+            return i;
+          }
+        }
+
+        return 0;
+      }
+
+      function funcEditData(index, email, address, adminValue) {
+        var x = document.getElementById("myTable").rows[index].cells;
+        x[1].innerHTML = email;
+        x[2].innerHTML = address;
+        x[3].innerHTML = adminValue;
+      }
+
+      function funcEmptyTable() {
+        var totalRowCount = document.getElementById("myTable").rows.length;
+
+        for (let i = 1; i < totalRowCount; i++) {
+          document.getElementById("myTable").deleteRow(1);
+        }
       }
     </script>
   </body>

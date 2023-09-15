@@ -51,20 +51,17 @@
   var address = document.getElementById("input-address").value;
   var admin = document.getElementById("input-admin");
   var imageInp = document.getElementById("input-image").files[0];
-  let imageSrc = "";
-
+  var imageSrc = "";
   if (admin.checked == true) {
     var adminValue = "X";
   } else {
     var adminValue = "-";
   }
-
-
   if (imageInp) {
     img = document.createElement("img");
     img.style.width = "64px";
     img.style.length = "64px";
-    imageSrc = URL.createObjectURL(imageInp)
+    imageSrc = URL.createObjectURL(imageInp);
     img.src = imageSrc;
   }
   var index = funcCheckDuplicateUsername(username);
@@ -81,7 +78,7 @@
     cell1.innerHTML = email;
     cell2.innerHTML = address;
     cell3.innerHTML = adminValue;
-    cell4.appendChild(img)
+    cell4.appendChild(img);
   }
 }
 function funcCheckDuplicateUsername(username) {

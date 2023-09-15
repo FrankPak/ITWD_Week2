@@ -78,7 +78,14 @@
     cell1.innerHTML = email;
     cell2.innerHTML = address;
     cell3.innerHTML = adminValue;
-    cell4.appendChild(img);
+    if (imageInp) {
+      img = document.createElement("img");
+      img.style.width = "64px";
+      img.style.length = "64px";
+      imageSrc = URL.createObjectURL(imageInp);
+      img.src = imageSrc;
+      cell4.appendChild(img);
+    }
   }
 }
 function funcCheckDuplicateUsername(username) {
